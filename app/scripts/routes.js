@@ -31,6 +31,9 @@
             .when('/liststandinginstructions/:officeId/:clientId', {
                 templateUrl: 'views/accounttransfers/list_standinginstruction.html'
             })
+            .when('/addpaymentInventory/:loanId', {
+              templateUrl: 'views/loans/addpaymentinventory.html'
+            })
             .when('/listaccounttransactions/:instructionId', {
                 templateUrl: 'views/accounttransfers/list_transactions.html'
             })

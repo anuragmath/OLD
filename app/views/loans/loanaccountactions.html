@@ -171,6 +171,7 @@
             <div class="col-sm-3">
                 <select id="paymentTypeId" ng-model="formData.paymentTypeId" class="form-control"
                         ng-options="paymentType.id as paymentType.name for paymentType in paymentTypes"
+                        ng-change="removeData(formData.paymentTypeId)"
                         value="{{paymentType.id}}"></select>
             </div>
         </div>
@@ -186,7 +187,7 @@
         </div>
         <div collapse="!showPaymentDetails">
             <div class="form-group">
-                <label class="control-label col-sm-2" for="accountNumber">{{ 'label.input.accnum' | translate}}</label>
+                <label class="control-label col-sm-2" for="accountNumber">{{ 'Cheque Date' | translate}}</label>
 
                 <div class="col-sm-3">
                     <input id="accountNumber" type="text" class="form-control" ng-model="formData.accountNumber">

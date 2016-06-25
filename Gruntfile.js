@@ -43,9 +43,9 @@ module.exports = function(grunt) {
     connect: {
         options: {
             port:  9000,
-            hostname: 'localhost',
+            hostname: '192.168.1.5',
             livereload: 35729,
-            open:'http://<%= connect.options.hostname %>:<%= connect.options.port %>?baseApiUrl=https://demo.openmf.org'            
+            open:'http://<%= connect.options.hostname %>:<%= connect.options.port %>?baseApiUrl=https://demo.openmf.org'
         },
         livereload: {
             options: {
@@ -334,10 +334,10 @@ module.exports = function(grunt) {
 
   // Run development server using grunt serve
   grunt.registerTask('serve', ['clean:server', 'copy:server', 'connect:livereload', 'watch']);
-  
+
   // Validate JavaScript and HTML files
   grunt.registerTask('validate', ['jshint:all', 'validation']);
-  
+
   // Default task(s).
   grunt.registerTask('default', ['clean', 'jshint', 'copy:dev']);
   grunt.registerTask('prod', ['clean', 'copy:prod', 'concat', 'uglify:prod', 'devcode:dist', 'hashres','replace']);

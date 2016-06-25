@@ -52,12 +52,19 @@
                         getCharges: {method: 'GET'},
                         waive:{method:'POST' , params:{command : 'waive'}}
                     }),
+                    PaymentInventoryResource: defineResource(apiVer + "/loans/:loanId/paymentInventory/:inventoryId", {loanId: '@loanId', inventoryId: '@id'},{
+                    get:{method: 'GET', params: {}}
+                    }),
+
                     clientTransactionResource: defineResource(apiVer + "/clients/:clientId/transactions/:transactionId", {clientId: '@clientId', transactionId: '@transactionId'}, {
                         getTransactions: {method: 'GET',isArray: true},
                         undoTransaction :{method:'POST', params:{command:'undo'}}
                     }),
                     clientIdentifierResource: defineResource(apiVer + "/client_identifiers/:clientIdentityId/documents", {clientIdentityId: '@clientIdentityId'}, {
                         get: {method: 'GET', params: {}, isArray: true}
+                    }),
+                    paymentInventoryTemplateResource: defineResource(apiVer + "/loans/:loanId/paymentInventory/template", {loanId: '@loanId'},{
+                        get: {method: 'GET', params: {}}
                     }),
                     clientDocumentsResource: defineResource(apiVer + "/clients/:clientId/documents/:documentId", {clientId: '@clientId', documentId: '@documentId'}, {
                         getAllClientDocuments: {method: 'GET', params: {}, isArray: true}
@@ -155,8 +162,8 @@
                         update: {method: 'PUT', params: {}},
                         getAllInterestRateCharts: {method: 'GET', params: {productId: '@productId'}, isArray: true}
                     }),
-                    batchResource: defineResource(apiVer + "/batches", {}, { 
-                        post: {method: 'POST', params: {}, isArray: true}                       
+                    batchResource: defineResource(apiVer + "/batches", {}, {
+                        post: {method: 'POST', params: {}, isArray: true}
                     }),
                     loanResource: defineResource(apiVer + "/loans/:loanId/:resourceType/:resourceId", {resourceType: '@resourceType', loanId: '@loanId', resourceId: '@resourceId'}, {
                         getAllLoans: {method: 'GET', params: {}},

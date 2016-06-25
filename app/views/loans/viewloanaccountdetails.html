@@ -765,6 +765,43 @@
                             </tr>
                         </table>
                     </tab>
+                    <tab heading="{{'Payment Inventory' | translate}}">
+
+                                            <table class="table table-striped .width100">
+                                                <colgroup span="4"></colgroup>
+                                                <thead>
+                                                <tr>
+                                                    <th scope="col">#</th>
+                                                    <th scope="col">{{'label.heading.date' | translate}}</th>
+                                                    <th scope="col">&nbsp;</th>
+                                                    <th scope="col">{{'Amount Due' | translate}}</th>
+                                                    <th scope="col">{{'Cheque Date' | translate}}</th>
+                                                    <th scope="col">{{'Cheque No' | translate}}</th>
+                                                    <th scope="col">{{'IFSC Code' | translate}}</th>
+                                                    <th scope="col">{{'Presented' | translate}}</th>
+                                                    <th scope="col">{{'Name Of Bank' | translate}}</th>
+                                                    <th scope="col">{{'Status' | translate}}</th>
+                                                      </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr ng-repeat="payment in loandetails.paymentInventory.paymentInventoryPdc">
+                                                    <td scope="row">{{payment.period}}</td>
+                                                    <td>{{payment.date | DateFormat}}</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>{{payment.amount | number}}</td>
+                                                    <td>{{payment.chequeDate | DateFormat}}</td>
+                                                    <td>{{payment.chequeno | number}}</td>
+                                                    <td>{{payment.ifscCode}}</td>
+                                                    <td>{{payment.makePresentation}}</td>
+                                                    <td>{{payment.nameOfBank}}</td>
+                                                    <td>{{payment.presentationStatus.value}}</td>
+                                                </tr>
+                                                </tbody>
+
+                                            </table>
+
+                                        </tab>
+  
 
                     <script type="text/ng-template" id="delcharge.html">
                         <div class="modal-header silver">

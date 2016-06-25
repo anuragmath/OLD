@@ -121,6 +121,9 @@
                     case "adjustrepaymentschedule":
                         location.path('/adjustrepaymentschedule/'+accountId) ;
                         break ;
+                    case "addpaymentInventory":
+                        location.path('/addpaymentInventory/' + accountId);
+                        break;
                 }
             };
 
@@ -172,6 +175,7 @@
                     }
 
                     scope.chargeTableShow = true;
+                    scope.PaymentInventoryShow = true;
                 }
                 else {
                     scope.chargeTableShow = false;
@@ -253,6 +257,11 @@
                             name: "button.disburse",
                             icon: "icon-flag",
                             taskPermissionName: 'DISBURSE_LOAN'
+                        },
+                        {
+                          name: "button.addpaymentInventory",
+                          icon: "icon-money",
+                          taskPermissionName: "CREATE_PAYMENTINVENTORY"
                         },
                         {
                             name: "button.disbursetosavings",

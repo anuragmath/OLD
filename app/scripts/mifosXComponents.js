@@ -24,6 +24,7 @@ define(['Q', 'underscore', 'mifosX'], function (Q) {
             'collection/CollectionSheetController',
             'collection/IndividualCollectionSheetController',
             'loanAccount/ViewLoanDetailsController',
+            'loanAccount/AddPaymentInventory',
             'loanAccount/AdjustRepaymentSchedule',
             'loanAccount/NewLoanAccAppController',
             'loanAccount/LoanAccountActionsController',

@@ -115,6 +115,25 @@
                         if(data.penaltyChargesPortion>0){
                             scope.showPenaltyPortionDisplay = true;
                         }
+                        scope.formData.accountNumber = data.paymentInventoryPdcData.chequeDate;
+                        scope.formData.checkNumber = data.paymentInventoryPdcData.chequeno;
+                        scope.formData.routingCode = data.paymentInventoryPdcData.ifscCode;
+                        scope.formData.bankNumber = data.paymentInventoryPdcData.nameOfBank;
+
+                        scope.removeData = function(item){
+                          if(item != '1' ){
+                            delete scope.formData.accountNumber;
+                            delete scope.formData.checkNumber;
+                            delete scope.formData.routingCode;
+                            delete scope.formData.bankNumber;
+                          }
+                          if (item == '1'){
+                            scope.formData.accountNumber = data.paymentInventoryPdcData.chequeDate;
+                            scope.formData.checkNumber = data.paymentInventoryPdcData.chequeno;
+                            scope.formData.routingCode = data.paymentInventoryPdcData.ifscCode;
+                            scope.formData.bankNumber = data.paymentInventoryPdcData.nameOfBank;
+                          }
+                        }
                     });
                     scope.title = 'label.heading.loanrepayments';
                     scope.labelName = 'label.input.transactiondate';
