@@ -1,0 +1,109 @@
+<div class="col-md-12" ng-controller="AddPaymentInventory">
+<div>
+    <ul class="breadcrumb">
+        <li ng-show="loandetails.clientName"><a
+                ng-href="#/viewclient/{{loandetails.clientId}}">{{loandetails.clientName}}</a></li>
+        <li ng-show="loandetails.group"><a
+                ng-href="#/viewgroup/{{loandetails.group.id}}">{{loandetails.group.name}}</a></li>
+        <li class="active">{{loandetails.loanProductName}}({{loandetails.accountNo}})</li>
+    </ul>
+</div>
+
+
+
+<form name="addpaymentinvnetory" novalidate="" class="form-horizontal well" rc-submit="submit()">
+    <api-validate></api-validate>
+    <fieldset>
+        <table class="table table-striped .width100">
+            <colgroup span="4"></colgroup>
+            <thead>
+              <tr>
+
+                <th scope="col">Type</th>
+
+              </tr>
+
+            <tr>
+
+                <th colspan="2" scope="colgroup"></th>
+                  <th ng-show="formData.pdcTypeId == '1'"scope="col">Is Series</th>
+                <th ng-show="formData.pdcTypeId == '1'" colspan="2" scope="colgroup"><input id="isSeriesCheques" class="input-mini-small" type="checkbox"
+                       ng-model="formData.isSeriesCheques" ng-change="changeData(formData.isSeriesCheques)"/></th>
+                <th colspan="2" scope="colgroup"></th>
+            </tr>
+
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">{{'label.heading.date' | translate}}</th>
+
+                <th scope="col">{{'Cheque No' | translate}}</th>
+                <th scope="col">{{'Name of Bank' | translate}}</th>
+                <th scope="col">{{'Ifsc Code' | translate}}</th>
+
+                <th scope="col">{{'Amount' | translate}}</th>
+            </tr>
+            </thead>
+            <tbody>
+              <tr>
+
+
+                          <select id="pdcTypeId" name="type" ng-model="formData.pdcTypeId" ng-options="pdcType.id as pdcType.name for pdcType in pdcTypes" value="{{pdc.id}}"
+                              ng-change="changePdcData(formData.pdcTypeId)">
+
+                                </select>
+
+              </tr>
+              <tr  ng-repeat="payment in pdcData">
+
+                  <td scope="row">{{payment.period}}</td>
+              <td>
+                  <input id="date" name="date" datepicker-pop="dd MMMM yyyy" class="form-control"
+                               type="text"
+                               ng-model="payment.dueDate" is-open="opened" min="'2000-01-01'" max="restrictDate"
+                               required/>  </td>
+                <td>
+                    <input id="chequeno" name="chequeno" class="form-control" type="text"
+                           ng-model="payment.chequeno"
+                           />
+                </td>
+                <td>
+                  <input id="nameofBank" name="nameOfBank" class="form-control" type="text"
+                       ng-model="payment.nameOfBank"/>
+                </td>
+                <td>
+                  <input id="ifscCode" name="ifscCode" class="form-control" type="text"
+                       ng-model="payment.ifscCode"/></td>
+                <td>
+                    <input id="totalInstallmentAmountForPeriod" name="totalInstallmentAmountForPeriod" class="form-control"
+                           type="text"
+                           ng-model="payment.totalInstallmentAmountForPeriod" number-format/>
+                </td>
+                <td ng-show="formData.pdcTypeId == 2">
+                    <div>
+                        <a ng-click="addInstallment($index)"><i class="icon-plus icon-white"></i></a>
+                    </div>
+                </td>
+                <td ng-show="formData.pdcTypeId == 2">
+                    <div>
+                        <a ng-click="deleteInstallment($index)"><i class="icon-remove icon-white"></i></a>
+                    </div>
+                </td>
+              </tr>
+            </tbody>
+
+
+        </table>
+
+    </fieldset>
+
+    <div class="col-md-offset-4">
+        <a id="cancel" href="#/viewloanaccount/{{loandetails.id}}">
+            <button type="reset" class="btn btn-default">{{'label.button.cancel' | translate}}</button>
+        </a>
+
+        <button id="save" type="submit" ng-click="visitValidation=true" class="btn btn-primary" value="submit"
+                has-permission='CREATE_PAYMENTINVENTORY'>{{'label.button.save' | translate}}
+        </button>
+    </div>
+</form>
+</div>
