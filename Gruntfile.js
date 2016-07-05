@@ -43,7 +43,7 @@ module.exports = function(grunt) {
     connect: {
         options: {
             port:  9000,
-            hostname: '192.168.1.5',
+            hostname: 'localhost',
             livereload: 35729,
             open:'http://<%= connect.options.hostname %>:<%= connect.options.port %>?baseApiUrl=https://demo.openmf.org'
         },
