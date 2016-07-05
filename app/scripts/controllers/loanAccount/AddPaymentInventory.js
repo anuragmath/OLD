@@ -50,7 +50,7 @@
             if (type == 2){
               console.log(type);
               scope.pdcData = [];
-              scope.pdcData.push({ifscCode: scope.pdcData.ifscCode, presentationStatus:1,makePresentation: false,  period: scope.pdcData.period, chequeNo: scope.pdcData.chequeno, amount: scope.pdcData.totalInstallmentAmountForPeriod, chequeDate: dateFilter(scope.pdcData.dueDate, scope.df), date: dateFilter(scope.pdcData.dueDate, scope.df), nameOfBank:scope.pdcData.nameOfBank  });
+              scope.pdcData.push({ifscCode: scope.pdcData.ifscCode, micrCode: scope.pdcData.micrCode, presentationStatus:1,makePresentation: false,  period: scope.pdcData.period, chequeNo: scope.pdcData.chequeno, amount: scope.pdcData.totalInstallmentAmountForPeriod, chequeDate: dateFilter(scope.pdcData.dueDate, scope.df), date: dateFilter(scope.pdcData.dueDate, scope.df), nameOfBank:scope.pdcData.nameOfBank, branchName: scope.pdcData.branchName  });
 
 
             }else {
@@ -61,6 +61,7 @@
         scope.addInstallment = function (index) {
             var pdcData = (
               {ifscCode: scope.pdcData.ifscCode,
+                micrCode: scope.pdcData.micrCode,
                  presentationStatus:1,
                  makePresentation: false,
                   period: scope.pdcData.period,
@@ -68,7 +69,8 @@
                     amount: scope.pdcData.totalInstallmentAmountForPeriod,
                      chequeDate: dateFilter(scope.pdcData.dueDate, scope.df),
                       date: dateFilter(scope.pdcData.dueDate, scope.df),
-                       nameOfBank:scope.pdcData.nameOfBank }) ;
+                       nameOfBank:scope.pdcData.nameOfBank,
+                       branchName: scope.pdcData.branchName }) ;
             scope.pdcData.splice(index+1, 0, pdcData);
             scope.pdcData.push() ;
 
@@ -94,7 +96,7 @@
                   this.formData.pdcTypeId = 2;
                 }
                 for (var i in scope.pdcData) {
-                      scope.formData.pdcData.push({ifscCode: scope.pdcData[i].ifscCode, presentationStatus:1,makePresentation: false,  period: scope.pdcData[i].period, chequeNo: scope.pdcData[i].chequeno, amount: scope.pdcData[i].totalInstallmentAmountForPeriod, chequeDate: dateFilter(scope.pdcData[i].dueDate, scope.df), date: dateFilter(scope.pdcData[i].dueDate, scope.df), nameOfBank:scope.pdcData[i].nameOfBank  });
+                      scope.formData.pdcData.push({ifscCode: scope.pdcData[i].ifscCode, micrCode: scope.pdcData[i].micrCode, presentationStatus:1,makePresentation: false,  period: scope.pdcData[i].period, chequeNo: scope.pdcData[i].chequeno, amount: scope.pdcData[i].totalInstallmentAmountForPeriod, chequeDate: dateFilter(scope.pdcData[i].dueDate, scope.df), date: dateFilter(scope.pdcData[i].dueDate, scope.df), nameOfBank:scope.pdcData[i].nameOfBank, branchName: scope.pdcData[i].branchName  });
                     console.log(scope.formData.pdcData);
                 }
 
