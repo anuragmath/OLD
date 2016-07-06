@@ -2,6 +2,7 @@
     mifosX.controllers = _.extend(module, {
         ViewLoanDetailsController: function (scope, routeParams, resourceFactory, location, route, http, $modal, dateFilter, API_VERSION, $sce, $rootScope) {
             scope.loandocuments = [];
+            //scope.paymentInventoryId ;
             scope.report = false;
             scope.hidePentahoReport = true;
             scope.formData = {};
@@ -124,6 +125,8 @@
                     case "addpaymentInventory":
                         location.path('/addpaymentInventory/' + accountId);
                         break;
+                    case "editPaymentInventory":
+                        location.path('/loan/' + accountId + '/editPaymentInventory/' + scope.paymentInventoryId);
                 }
             };
 
@@ -159,6 +162,10 @@
                 scope.isWaived = scope.loandetails.repaymentSchedule.totalWaived > 0;
                 scope.date.fromDate = new Date(data.timeline.actualDisbursementDate);
                 scope.date.toDate = new Date();
+                if(scope.loandetails.paymentInventory){
+                    scope.paymentInventoryId = scope.loandetails.paymentInventory.id;
+                    console.log(scope.paymentInventoryId);
+                }
                 scope.status = data.status.value;
                 scope.chargeAction = data.status.value == "Submitted and pending approval" ? true : false;
                 scope.decimals = data.currency.decimalPlaces;
@@ -175,7 +182,7 @@
                     }
 
                     scope.chargeTableShow = true;
-                    scope.PaymentInventoryShow = true;
+                          scope.PaymentInventoryShow = true;
                 }
                 else {
                     scope.chargeTableShow = false;
@@ -258,11 +265,11 @@
                             icon: "icon-flag",
                             taskPermissionName: 'DISBURSE_LOAN'
                         },
-                        {
+                        /*{
                           name: "button.addpaymentInventory",
-                          icon: "icon-money",
+                          icon: "icon-plus-sign",
                           taskPermissionName: "CREATE_PAYMENTINVENTORY"
-                        },
+                        },*/
                         {
                             name: "button.disbursetosavings",
                             icon: "icon-flag",
@@ -278,6 +285,10 @@
                             {
                                 name: "button.addloancharge",
                                 taskPermissionName: 'CREATE_LOANCHARGE'
+                            },
+                            {
+                                name: "button.editPaymentInventory",
+                                taskPermissionName: 'UPDATE_PAYMENTINVENTORY'
                             },
                             {
                                 name: "button.listguarantor",
@@ -308,6 +319,11 @@
                             icon: "icon-dollar",
                             taskPermissionName: 'REPAYMENT_LOAN'
                         },
+                        /*{
+                          name: "button.addpaymentInventory",
+                          icon: "icon-plus-sign",
+                          taskPermissionName: "CREATE_PAYMENTINVENTORY"
+                        },*/
                         {
                             name: "button.undodisbursal",
                             icon: "icon-undo",
@@ -318,6 +334,10 @@
                             {
                                 name: "button.waiveinterest",
                                 taskPermissionName: 'WAIVEINTERESTPORTION_LOAN'
+                            },
+                            {
+                                name: "button.editPaymentInventory",
+                                taskPermissionName: 'UPDATE_PAYMENTINVENTORY'
                             },
                             {
                                 name: "button.reschedule",
@@ -355,6 +375,7 @@
 
                     };
 
+
                     if (data.canDisburse) {
                         scope.buttons.singlebuttons.splice(1, 0, {
                             name: "button.disburse",
@@ -377,6 +398,7 @@
                         });
                     }
 
+
                     if(scope.recalculateInterest){
                         scope.buttons.singlebuttons.splice(1, 0, {
                             name: "button.prepayment",
@@ -385,6 +407,14 @@
                         });
                     }
                 }
+                if(!scope.loandetails.paymentInventory){
+                        scope.buttons.singlebuttons.splice(1, 0, {
+                          name: "button.addpaymentInventory",
+                          icon: "icon-plus-sign",
+                          taskPermissionName: "CREATE_PAYMENTINVENTORY"
+                        });
+                    }
+                    
                 if (data.status.value == "Overpaid") {
                     scope.buttons = { singlebuttons: [
                         {

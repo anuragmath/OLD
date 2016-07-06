@@ -34,6 +34,9 @@
             .when('/addpaymentInventory/:loanId', {
               templateUrl: 'views/loans/addpaymentinventory.html'
             })
+            .when('/loan/:loanId/editPaymentInventory/:paymentInventoryId', {
+                templateUrl: 'views/loans/editPaymentInventory.html'
+            })
             .when('/listaccounttransactions/:instructionId', {
                 templateUrl: 'views/accounttransfers/list_transactions.html'
             })
