@@ -1296,6 +1296,8 @@
     "#Anchors": "..",
     "label.anchor.viewloanaccount": "View Loan Account",
     "label.anchor.addloancharge": "Add Loan Charge",
+    "label.anchor.addpaymentInventory": "Add Payment Inventory",
+    "label.anchor.editPaymentInventory": "Edit Payment Inventory",
     "label.anchor.addloancollateral": "Add Loan Collateral",
     "label.anchor.assignloanofficer": "Assign Loan Officer",
     "label.anchor.repaymentinfo": "Repayment Info",
@@ -1398,6 +1400,8 @@
 
     "#Buttons": "..",
     "label.button.addloancharge": "Add Loan Charge",
+    "label.button.addpaymentInventory": "Add Payment Inventory",
+    "label.button.editPaymentInventory": "Edit Payment Inventory",
     "label.button.addcollateral": "Add Collateral",
     "label.button.guarantor": "Guarantor",
     "label.button.listguarantor": "View Guarantors",

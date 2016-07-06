@@ -52,8 +52,10 @@
                         getCharges: {method: 'GET'},
                         waive:{method:'POST' , params:{command : 'waive'}}
                     }),
-                    PaymentInventoryResource: defineResource(apiVer + "/loans/:loanId/paymentInventory/:inventoryId", {loanId: '@loanId', inventoryId: '@id'},{
-                    get:{method: 'GET', params: {}}
+
+                    PaymentInventoryResource: defineResource(apiVer + "/loans/:loanId/paymentInventory/:inventoryId", {loanId: '@loanId', inventoryId: '@inventoryId'},{
+                             getInventory: {method: 'GET', params:{}, isArray: false},
+                             putInventory: {method: 'PUT', params:{}}
                     }),
 
                     clientTransactionResource: defineResource(apiVer + "/clients/:clientId/transactions/:transactionId", {clientId: '@clientId', transactionId: '@transactionId'}, {
