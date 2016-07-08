@@ -162,6 +162,8 @@
                 scope.isWaived = scope.loandetails.repaymentSchedule.totalWaived > 0;
                 scope.date.fromDate = new Date(data.timeline.actualDisbursementDate);
                 scope.date.toDate = new Date();
+                scope.date.today = new Date();
+                scope.date.firstRepaymentDate = new Date(scope.loandetails.repaymentSchedule.periods[1].dueDate); 
                 if(scope.loandetails.paymentInventory){
                     scope.paymentInventoryId = scope.loandetails.paymentInventory.id;
                     console.log(scope.paymentInventoryId);
@@ -286,10 +288,10 @@
                                 name: "button.addloancharge",
                                 taskPermissionName: 'CREATE_LOANCHARGE'
                             },
-                            {
+                            /*{
                                 name: "button.editPaymentInventory",
                                 taskPermissionName: 'UPDATE_PAYMENTINVENTORY'
-                            },
+                            },*/
                             {
                                 name: "button.listguarantor",
                                 taskPermissionName: 'READ_GUARANTOR'
@@ -335,10 +337,10 @@
                                 name: "button.waiveinterest",
                                 taskPermissionName: 'WAIVEINTERESTPORTION_LOAN'
                             },
-                            {
+                            /*{
                                 name: "button.editPaymentInventory",
                                 taskPermissionName: 'UPDATE_PAYMENTINVENTORY'
-                            },
+                            },*/
                             {
                                 name: "button.reschedule",
                                 taskPermissionName: 'CREATE_RESCHEDULELOAN'
@@ -407,7 +409,7 @@
                         });
                     }
                 }
-                if(!scope.loandetails.paymentInventory){
+                if(!scope.loandetails.paymentInventory && (data.status.value == "Approved" || data.status.value == "Active")){
                         scope.buttons.singlebuttons.splice(1, 0, {
                           name: "button.addpaymentInventory",
                           icon: "icon-plus-sign",
@@ -415,6 +417,12 @@
                         });
                     }
                     
+                if(scope.loandetails.paymentInventory && scope.date.today <= scope.date.firstRepaymentDate) {
+                    scope.buttons.options.splice(1,0, {
+                            name: "button.editPaymentInventory",
+                            taskPermissionName: 'UPDATE_PAYMENTINVENTORY'
+                    });
+                }
                 if (data.status.value == "Overpaid") {
                     scope.buttons = { singlebuttons: [
                         {

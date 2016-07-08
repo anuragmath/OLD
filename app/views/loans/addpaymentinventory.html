@@ -7,7 +7,6 @@
 </div>
 
 
-
 <form name="addpaymentinvnetory" novalidate="" class="form-horizontal well" rc-submit="submit()">
     <api-validate></api-validate>
     <fieldset>
@@ -33,11 +32,15 @@
                 <th scope="col">#</th>
                 <th scope="col">{{'Cheque Date' | translate}}</th>
 
-                <th scope="col">{{'Cheque No' | translate}}</th>
-                <th scope="col">{{'Name of Bank' | translate}}</th>
+                <th scope="col">{{'Cheque No' | translate}}
+                <span class="required">*</span></th>
+                <th scope="col">{{'Name of Bank' | translate}}
+                <span class="required">*</span></th>
                 <th scope="col">{{'Branch Name' | translate}}</th>
-                <th scope="col">{{'Ifsc Code' | translate}}</th>
-                <th scope="col">{{'MICR Code' | translate}}</th>
+                <th scope="col">{{'Ifsc Code' | translate}}
+                <span class="required">*</span></th>
+                <th scope="col">{{'MICR Code' | translate}}
+                <span class="required">*</span></th>
                 <th scope="col">{{'Amount' | translate}}</th>
             </tr>
             </thead>
@@ -58,31 +61,77 @@
                   <input id="date" name="date" datepicker-pop="dd MMMM yyyy" class="form-control"
                                type="text"
                                ng-model="payment.dueDate" is-open="opened" min="'2000-01-01'" max="restrictDate"
-                               required/>  </td>
+                               />  </td>
                 <td>
+                <ng-form name="chequeValidate">
+
                     <input id="chequeno" name="chequeno" class="form-control" type="text"
-                           ng-model="payment.chequeno"
-                           />
+                           ng-model="payment.chequeno" ng-minlength=6 ng-maxlength= 6 ng-pattern="/^[0-9]+$/"
+                           required late-validate/>
+                            <span style = "color:red" ng-show = "chequeValidate.chequeno.$dirty && chequeValidate.chequeno.$invalid">
+                            
+                        <small class="required" ng-show = "chequeValidate.chequeno.$error.pattern">Must Be Numeric</small>
+                        <small class="required" ng-show = "chequeValidate.chequeno.$error.maxlength || chequeValidate.chequeno.$error.minlength">Must Be 6 Digit</small> 
+                        <form-validate valattributeform="chequeValidate" valattribute="chequeno"/>
+                     </span>
+                           
+            </ng-form>
+             
                 </td>
                 <td>
+                <ng-form name="bankNameValidate">
                   <input id="nameofBank" name="nameOfBank" class="form-control" type="text"
-                       ng-model="payment.nameOfBank"/>
+                       ng-model="payment.nameOfBank" ng-maxlength= 40  ng-pattern="/^[a-z A-Z0-9]*$/" required late-validate/>
+                       <span style = "color:red" ng-show = "bankNameValidate.nameOfBank.$dirty && bankNameValidate.nameOfBank.$invalid">
+                            
+                        <small class="required" ng-show = "bankNameValidate.nameOfBank.$error.pattern">Must Be AlphaNumeric Only</small>
+                        <small class="required" ng-show = "bankNameValidate.nameOfBank.$error.maxlength">Must be 40 digit</small> 
+                        <form-validate valattributeform="bankNameValidate" valattribute="nameOfBank"/>
+                     </span>
+                     </ng-form>
                 </td>
+                </ng-form>
                 <td>
+                <ng-form name="branchNameValidate">
                   <input id="branchName" name="branchName" class="form-control" type="text"
-                       ng-model="payment.branchName"/>
+                       ng-model="payment.branchName" ng-maxlength= 25  ng-pattern="/^[a-zA-Z0-9]*$/"/>
+                       <span style = "color:red" ng-show = "branchNameValidate.branchName.$dirty && branchNameValidate.branchName.$invalid">
+                            
+                        <small class="required" ng-show = "branchNameValidate.branchName.$error.pattern">Must Be AlphaNumeric Only</small>
+                        <small class="required" ng-show = "branchNameValidate.branchName.$error.maxlength">Must Be 25 Digit</small> 
+                     </span>
+                </ng-form>
                 </td>
                 <td>
+                <ng-form name="ifscValidate">
                   <input id="ifscCode" name="ifscCode" class="form-control" type="text"
-                       ng-model="payment.ifscCode"/>
+                       ng-model="payment.ifscCode" ng-minlength= 11 ng-maxlength= 11  ng-pattern="/^[a-zA-Z0-9]*$/" required late-validate/>
+                       <span style = "color:red" ng-show = "ifscValidate.ifscCode.$dirty && ifscValidate.ifscCode.$invalid">
+                            
+                        <small class="required" ng-show = "ifscValidate.ifscCode.$error.pattern">Must Be AlphaNumeric Only</small>
+                        <small class="required" ng-show = "ifscValidate.ifscCode.$error.maxlength || ifscValidate.ifscCode.$error.minlength">Must Be 11 Digit </small> 
+                        <form-validate valattributeform="ifscValidate" valattribute="ifscCode"/>
+                     </span>
+                </ng-form>
                 </td>
                 <td>
+                <ng-form name="micrValidate">
                   <input id="micrCode" name="micrCode" class="form-control" type="text"
-                       ng-model="payment.micrCode"/></td>
+                       ng-model="payment.micrCode" ng-minlength= 9 ng-maxlength= 9  ng-pattern="/^[a-zA-Z0-9]*$/" required late-validate/>
+                       <span style = "color:red" ng-show = "micrValidate.micrCode.$dirty && micrValidate.micrCode.$invalid">
+                            
+                        <small class="required" ng-show = "micrValidate.micrCode.$error.pattern">Must Be AlphaNumeric Only</small>
+                        <small class="required" ng-show = "micrValidate.micrCode.$error.maxlength || micrValidate.micrCode.$error.minlength">Must Be 9 Digit </small> 
+                        <form-validate valattributeform="micrValidate" valattribute="micrCode"/>
+                     </span>
+                  </ng-form>   
+                </td>
                 <td>
+               
                     <input id="totalInstallmentAmountForPeriod" name="totalInstallmentAmountForPeriod" class="form-control"
                            type="text"
-                           ng-model="payment.totalInstallmentAmountForPeriod" number-format/>
+                           ng-model="payment.totalInstallmentAmountForPeriod" number-format />
+                  
                 </td>
                 <td ng-show="formData.pdcTypeId == 2">
                     <div>
@@ -108,7 +157,7 @@
         </a>
 
         <button id="save" type="submit" ng-click="visitValidation=true" class="btn btn-primary" value="submit"
-                has-permission='CREATE_PAYMENTINVENTORY'>{{'label.button.save' | translate}}
+               ng-disabled="addpaymentinvnetory.$invalid" has-permission='CREATE_PAYMENTINVENTORY'>{{'label.button.save' | translate}}
         </button>
     </div>
 </form>
