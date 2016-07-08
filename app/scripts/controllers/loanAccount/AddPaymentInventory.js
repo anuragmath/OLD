@@ -62,7 +62,7 @@
             var pdcData = (
               {ifscCode: scope.pdcData.ifscCode,
                 micrCode: scope.pdcData.micrCode,
-                 presentationStatus:2,
+                 presentationStatus: 1,
                  makePresentation: false,
                   period: scope.pdcData.period,
                    chequeNo: scope.pdcData.chequeno,

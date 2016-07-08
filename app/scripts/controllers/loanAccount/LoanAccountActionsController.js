@@ -115,7 +115,8 @@
                         if(data.penaltyChargesPortion>0){
                             scope.showPenaltyPortionDisplay = true;
                         }
-                        scope.formData.accountNumber = data.paymentInventoryPdcData.chequeDate;
+                        if(!data.paymentInventoryPdcData.chequeDate)
+                            scope.formData.accountNumber = data.paymentInventoryPdcData.chequeDate;
                         scope.formData.checkNumber = data.paymentInventoryPdcData.chequeno;
                         scope.formData.routingCode = data.paymentInventoryPdcData.ifscCode;
                         scope.formData.bankNumber = data.paymentInventoryPdcData.nameOfBank;

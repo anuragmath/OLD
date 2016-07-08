@@ -58,27 +58,36 @@
                   <input id="date" name="date" datepicker-pop="dd MMMM yyyy" class="form-control"
                                type="text"
                                ng-model="payment.dueDate" is-open="opened" min="'2000-01-01'" max="restrictDate"
-                               required/>  </td>
+                               />  </td>
                 <td>
                     <input id="chequeno" name="chequeno" class="form-control" type="text"
-                           ng-model="payment.chequeno"
+                           ng-model="payment.chequeno" ng-minlength=6 ng-maxlength=6 ng-pattern="/^[0-9]+$/"
                            />
+
+                          <!-- <div ng-messages="addpaymentinvnetory.chequeno.$error && addpaymentinvnetory.chequeno.$dirty" class="errors">
+                           <span ng-message="required">Required!</span>
+                           <span ng-message="min">Too small!</span>
+ -->
+                    <!-- <span style = "color:red" ng-show = "addpaymentinvnetory.chequeno.$dirty && addpaymentinvnetory.chequeno.$invalid">
+                        <small class="required" ng-show = "addpaymentinvnetory.chequeno.$error.pattern">{{'Please enter correct lastname' | translate}}</small>
+                     </span> -->
                 </td>
                 <td>
                   <input id="nameofBank" name="nameOfBank" class="form-control" type="text"
-                       ng-model="payment.nameOfBank"/>
+                       ng-model="payment.nameOfBank" required/>
                 </td>
                 <td>
                   <input id="branchName" name="branchName" class="form-control" type="text"
-                       ng-model="payment.branchName"/>
+                       ng-model="payment.branchName" />
                 </td>
                 <td>
                   <input id="ifscCode" name="ifscCode" class="form-control" type="text"
-                       ng-model="payment.ifscCode"/>
+                       ng-model="payment.ifscCode" required/>
                 </td>
                 <td>
                   <input id="micrCode" name="micrCode" class="form-control" type="text"
-                       ng-model="payment.micrCode"/></td>
+                       ng-model="payment.micrCode" required/>
+                </td>
                 <td>
                     <input id="totalInstallmentAmountForPeriod" name="totalInstallmentAmountForPeriod" class="form-control"
                            type="text"
