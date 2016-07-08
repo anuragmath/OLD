@@ -96,7 +96,7 @@
                   this.formData.pdcTypeId = 2;
                 }
                 for (var i in scope.pdcData) {
-                      scope.formData.pdcData.push({ifscCode: scope.pdcData[i].ifscCode, micrCode: scope.pdcData[i].micrCode, presentationStatus:2,makePresentation: false,  period: scope.pdcData[i].period, chequeNo: scope.pdcData[i].chequeno, amount: scope.pdcData[i].totalInstallmentAmountForPeriod, chequeDate: dateFilter(scope.pdcData[i].dueDate, scope.df), date: dateFilter(scope.pdcData[i].dueDate, scope.df), nameOfBank:scope.pdcData[i].nameOfBank, branchName: scope.pdcData[i].branchName  });
+                      scope.formData.pdcData.push({ifscCode: scope.pdcData[i].ifscCode, micrCode: scope.pdcData[i].micrCode, presentationStatus:1,makePresentation: false,  period: scope.pdcData[i].period, chequeNo: scope.pdcData[i].chequeno, amount: scope.pdcData[i].totalInstallmentAmountForPeriod, chequeDate: dateFilter(scope.pdcData[i].dueDate, scope.df), date: dateFilter(scope.pdcData[i].dueDate, scope.df), nameOfBank:scope.pdcData[i].nameOfBank, branchName: scope.pdcData[i].branchName  });
                     console.log(scope.formData.pdcData);
                 }
 
