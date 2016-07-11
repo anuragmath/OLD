@@ -115,21 +115,22 @@
                         if(data.penaltyChargesPortion>0){
                             scope.showPenaltyPortionDisplay = true;
                         }
-                        if(!data.paymentInventoryPdcData.chequeDate)
-                            scope.formData.accountNumber = data.paymentInventoryPdcData.chequeDate;
+                        if(!data.paymentInventoryPdcData.chequeDate){
+                            scope.formData.accountNumber = new Date(data.paymentInventoryPdcData.chequeDate);
                         scope.formData.checkNumber = data.paymentInventoryPdcData.chequeno;
-                        scope.formData.routingCode = data.paymentInventoryPdcData.ifscCode;
+                        scope.formData.routingCode = data.paymentInventoryPdcData.micrCode;
                         scope.formData.bankNumber = data.paymentInventoryPdcData.nameOfBank;
+                    }
 
                         scope.removeData = function(item){
-                          if(item != '1' ){
+                          if(item != '2' ){
                             delete scope.formData.accountNumber;
                             delete scope.formData.checkNumber;
                             delete scope.formData.routingCode;
                             delete scope.formData.bankNumber;
                           }
-                          if (item == '1'){
-                            scope.formData.accountNumber = data.paymentInventoryPdcData.chequeDate;
+                          if (item == '2'){
+                            scope.formData.accountNumber = new Date(data.paymentInventoryPdcData.chequeDate);
                             scope.formData.checkNumber = data.paymentInventoryPdcData.chequeno;
                             scope.formData.routingCode = data.paymentInventoryPdcData.ifscCode;
                             scope.formData.bankNumber = data.paymentInventoryPdcData.nameOfBank;

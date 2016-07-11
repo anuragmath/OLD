@@ -22,7 +22,7 @@
                 <th scope="col">{{'Name of Bank' | translate}}
                 <span class="required">*</span></th>
                 <th scope="col">{{'Branch Name' | translate}}</th>
-                <th scope="col">{{'Ifsc Code' | translate}}
+                <th scope="col">{{'IFSC Code' | translate}}
                 <span class="required">*</span></th>
                 <th scope="col">{{'MICR Code' | translate}}
                 <span class="required">*</span></th>
@@ -40,18 +40,16 @@
                             />  </td>
                 <td>
                     <ng-form name="chequeValidate">
-
                     <input id="chequeno" name="chequeno" class="form-control" type="text"
-                           ng-model="payment.chequeno" ng-minlength=6 ng-maxlength= 6 ng-pattern="/^[0-9]+$/"
+                           ng-model="payment.chequeno" ng-minlength=6 ng-maxlength=6 ng-pattern="/^[0-9]+$/"
                            required late-validate/>
-                            <span style = "color:red" ng-show = "chequeValidate.chequeno.$dirty && chequeValidate.chequeno.$invalid">
+                             <span style = "color:red" ng-show = "chequeValidate.chequeno.$dirty && chequeValidate.chequeno.$invalid">
                             
                         <small class="required" ng-show = "chequeValidate.chequeno.$error.pattern">Must Be Numeric</small>
                         <small class="required" ng-show = "chequeValidate.chequeno.$error.maxlength || chequeValidate.chequeno.$error.minlength">Must Be 6 Digit</small> 
-                        <form-validate valattributeform="chequeValidate" valattribute="chequeno"/>
+                         <form-validate valattributeform="chequeValidate" valattribute="chequeno"/>
                      </span>
-                           
-            </ng-form>
+                    </ng-form>
                 </td>
                 <td>
                   <ng-form name="bankNameValidate">

@@ -17,6 +17,7 @@
           scope.pdcData = data.paymentInventoryPdc;
 
           for (var i in scope.pdcData){
+            scope.pdcData[i].chequeno = scope.pdcData[i].chequeno.toString();
             if(scope.pdcData[i].chequeDate != null)
               scope.pdcData[i].chequeDate = new Date(scope.pdcData[i].chequeDate);
           }

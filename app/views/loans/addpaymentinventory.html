@@ -22,7 +22,7 @@
             <tr>
 
                 <th colspan="2" scope="colgroup"></th>
-                  <th ng-show="formData.pdcTypeId == '1'"scope="col">Is Series</th>
+                  <th ng-show="formData.pdcTypeId == '1'" scope="col">Is Series</th>
                 <th ng-show="formData.pdcTypeId == '1'" colspan="2" scope="colgroup"><input id="isSeriesCheques" class="input-mini-small" type="checkbox"
                        ng-model="formData.isSeriesCheques" ng-change="changeData(formData.isSeriesCheques)"/></th>
                 <th colspan="2" scope="colgroup"></th>
@@ -31,7 +31,6 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">{{'Cheque Date' | translate}}</th>
-
                 <th scope="col">{{'Cheque No' | translate}}
                 <span class="required">*</span></th>
                 <th scope="col">{{'Name of Bank' | translate}}
@@ -46,25 +45,19 @@
             </thead>
             <tbody>
               <tr>
-
-
                           <select id="pdcTypeId" name="type" ng-model="formData.pdcTypeId" ng-options="pdcType.id as pdcType.name for pdcType in pdcTypes" value="{{pdc.id}}"
-                              ng-change="changePdcData(formData.pdcTypeId)">
-
+                              ng-change="changePdcData(formData.pdcTypeId)"> 
                                 </select>
-
               </tr>
               <tr  ng-repeat="payment in pdcData">
-
                   <td scope="row">{{payment.period}}</td>
-              <td>
+                <td>
                   <input id="date" name="date" datepicker-pop="dd MMMM yyyy" class="form-control"
                                type="text"
-                               ng-model="payment.dueDate" is-open="opened" min="'2000-01-01'" max="restrictDate"
-                               />  </td>
+                               ng-model="payment.dueDate" is-open="opened" min="'2000-01-01'" max="restrictDate" />
+                </td>
                 <td>
                 <ng-form name="chequeValidate">
-
                     <input id="chequeno" name="chequeno" class="form-control" type="text"
                            ng-model="payment.chequeno" ng-minlength=6 ng-maxlength= 6 ng-pattern="/^[0-9]+$/"
                            required late-validate/>
@@ -74,9 +67,7 @@
                         <small class="required" ng-show = "chequeValidate.chequeno.$error.maxlength || chequeValidate.chequeno.$error.minlength">Must Be 6 Digit</small> 
                         <form-validate valattributeform="chequeValidate" valattribute="chequeno"/>
                      </span>
-                           
-            </ng-form>
-             
+                    </ng-form>
                 </td>
                 <td>
                 <ng-form name="bankNameValidate">
@@ -90,7 +81,7 @@
                      </span>
                      </ng-form>
                 </td>
-                </ng-form>
+            
                 <td>
                 <ng-form name="branchNameValidate">
                   <input id="branchName" name="branchName" class="form-control" type="text"
@@ -102,6 +93,7 @@
                      </span>
                 </ng-form>
                 </td>
+
                 <td>
                 <ng-form name="ifscValidate">
                   <input id="ifscCode" name="ifscCode" class="form-control" type="text"
@@ -133,12 +125,13 @@
                            ng-model="payment.totalInstallmentAmountForPeriod" number-format />
                   
                 </td>
-                <td ng-show="formData.pdcTypeId == 2">
+                <td ng-show="formData.pdcTypeId == 2 || formData.pdcTypeId == 3">
                     <div>
                         <a ng-click="addInstallment($index)"><i class="icon-plus icon-white"></i></a>
+                           
                     </div>
                 </td>
-                <td ng-show="formData.pdcTypeId == 2">
+                <td ng-show="formData.pdcTypeId == 2 || formData.pdcTypeId == 3">
                     <div>
                         <a ng-click="deleteInstallment($index)"><i class="icon-remove icon-white"></i></a>
                     </div>

@@ -1839,6 +1839,7 @@
     "label.input.routingcode": "Routing code",
     "label.input.receiptnumber": "Receipt#",
     "label.input.banknumber": "Bank#",
+    "label.input.bankName": "Bank Name",
     "label.input.loanofficer": "Loan officer",
     "label.input.chargepaymentby": "Charge payment by",
     "label.input.duedate": "Due date",
