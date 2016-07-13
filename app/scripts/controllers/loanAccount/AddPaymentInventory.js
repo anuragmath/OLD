@@ -109,18 +109,15 @@
                   this.formData.isSeriesCheques = false;
                   this.formData.pdcTypeId = 2;
                 }
-                else if(scope.formData.pdcTypeId == 3){
+               
+                if(scope.formData.pdcTypeId == 3){
                   this.formData.isSeriesCheques = false;
                   this.formData.pdcTypeId = 3;
-                }
+                }              
                 for (var i in scope.pdcData) {
-                  if(scope.pdcData[i].ifscCode && scope.pdcData[i].micrCode && scope.pdcData[i].chequeno && scope.pdcData[i].totalInstallmentAmountForPeriod && dateFilter(scope.pdcData[i].dueDate, scope.df) && dateFilter(scope.pdcData[i].dueDate, scope.df) && scope.pdcData[i].nameOfBank && scope.pdcData[i].branchName){
                       scope.formData.pdcData.push({ifscCode: scope.pdcData[i].ifscCode, micrCode: scope.pdcData[i].micrCode, presentationStatus:1,makePresentation: false,  period: scope.pdcData[i].period, chequeNo: scope.pdcData[i].chequeno, amount: scope.pdcData[i].totalInstallmentAmountForPeriod, chequeDate: dateFilter(scope.pdcData[i].dueDate, scope.df), date: dateFilter(scope.pdcData[i].dueDate, scope.df), nameOfBank:scope.pdcData[i].nameOfBank, branchName: scope.pdcData[i].branchName  });
                     console.log(scope.formData.pdcData);
-                  }
                 }
-
-
             }
 
             resourceFactory.PaymentInventoryResource.save( {loanId: scope.loanId}, this.formData, function (data) {
