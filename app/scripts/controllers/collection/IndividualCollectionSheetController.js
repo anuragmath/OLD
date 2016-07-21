@@ -1,7 +1,7 @@
 'use strict';
 /*global _ */
 /*global mifosX */
-
+ 
 (function (module) {
     mifosX.controllers = _.extend(module, {
         IndividualCollectionSheetController: function (scope, resourceFactory, location, routeParams, dateFilter, localStorageService, route, $timeout) {
@@ -21,8 +21,8 @@
             resourceFactory.officeResource.getAllOffices(function (data) {
                 scope.offices = data;
             });
-
-
+ 
+ 
             scope.officeSelected = function (officeId) {
                 scope.officeId = officeId;
                 if (officeId) {
@@ -31,7 +31,7 @@
                     });
                 }
             };
-
+ 
             scope.showLoanPaymentDetails = function (parentindex, index) {
                 var client = scope.collectionsheetdata.clients[parentindex];
                 var loandetail = client.loans[index];
@@ -43,7 +43,7 @@
                 loandetail.receiptNumber = "";
                 loandetail.bankNumber = "";
             };
-
+ 
             scope.showSavingsPaymentDetails = function (parentindex, index) {
                 var client = scope.collectionsheetdata.clients[parentindex];
                 var savings = client.savings[index];
@@ -55,7 +55,26 @@
                 savings.receiptNumber = "";
                 savings.bankNumber = "";
             };
-
+ 
+            scope.changeData = function(parentindex,index,value){
+              var client = scope.collectionsheetdata.clients[parentindex];
+              var loandetail = client.loans[index];
+ 
+                if(loandetail.chequeData && value == 1){
+                  this.loan.accountNumber = loandetail.chequeData;
+                  this.loan.checkNumber = loandetail.chequeNumber;
+                  this.loan.routingCode = loandetail.micrCode;
+                  this.loan.bankNumber = loandetail.nameOfbank;
+                }else{
+                delete this.loan.accountNumber;
+                delete this.loan.checkNumber;
+                delete this.loan.routingCode;
+                delete this.loan.bankNumber;
+              }
+ 
+ 
+            }
+ 
             scope.previewCollectionSheet = function () {
                 scope.formData = {};
                 scope.formData.dateFormat = scope.df;
@@ -65,22 +84,25 @@
                 }
                 scope.formData.staffId = scope.loanOfficerId;
                 scope.formData.officeId = scope.officeId;
-
+ 
                 resourceFactory.collectionSheetResource.save({command: 'generateCollectionSheet'}, scope.formData, function (data) {
                     if (data.clients.length > 0) {
                         scope.collectionsheetdata = data;
                         scope.clients = data.clients;
+ 
+ 
                     } else {
                         scope.noData = true;
                         $timeout(function () {
                             scope.noData = false;
                         }, 3000);
                     }
-
+ 
+ 
                 });
-
+ 
             };
-
+ 
             if (localStorageService.getFromLocalStorage('Success') === 'true') {
                 scope.savesuccess = true;
                 localStorageService.removeFromLocalStorage('Success');
@@ -89,7 +111,7 @@
                     scope.val = false;
                 }, 3000);
             }
-
+ 
             scope.getLoanTotalDueAmount = function (loan) {
                 var principalInterestDue = loan.totalDue;
                 var chargesDue = loan.chargesDue;
@@ -101,7 +123,7 @@
                 }
                 return Math.ceil((Number(principalInterestDue) + Number(chargesDue)) * 100) / 100;
             };
-
+ 
             scope.constructBulkLoanAndSavingsRepaymentTransactions = function () {
                 scope.bulkRepaymentTransactions = [];
                 scope.bulkSavingsDueTransactions = [];
@@ -125,7 +147,7 @@
                             }
                             scope.bulkSavingsDueTransactions.push(savingsTransaction);
                         });
-
+ 
                         _.each(client.loans, function (loan) {
                             var totalDue = scope.getLoanTotalDueAmount(loan);
                             var loanTransaction = {
@@ -145,12 +167,12 @@
                     }
                 );
             };
-
+ 
             scope.submit = function () {
                 var data = {};
                 data.dateFormat = scope.df;
                 data.locale = scope.optlang.code;
-
+ 
                 if (scope.date.transactionDate) {
                     data.transactionDate = dateFilter(scope.date.transactionDate, scope.df);
                 }
@@ -165,7 +187,7 @@
                     route.reload();
                 });
             };
-
+ 
         }
     })
     ;
